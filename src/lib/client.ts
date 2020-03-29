@@ -1,5 +1,5 @@
-import cosmiconfig from "cosmiconfig";
 import grpc from "@grpc/grpc-js";
+import cosmiconfig from "cosmiconfig";
 import get from "lodash.get";
 
 import Auth from "./auth";
