@@ -1,5 +1,5 @@
 import * as protobufHelpers from "google-protobuf/google/protobuf/field_mask_pb";
-import { Client, CallOptions } from "grpc";
+import { Client, CallOptions } from "@grpc/grpc-js";
 import camelCase from "lodash.camelcase";
 import get from "lodash.get";
 import set from "lodash.set";

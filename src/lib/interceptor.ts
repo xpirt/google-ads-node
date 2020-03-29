@@ -1,4 +1,4 @@
-import grpc from "grpc";
+import grpc from "@grpc/grpc-js";
 
 import Auth from "./auth";
 import { Logger, LogOptions } from "./logger";
@@ -14,7 +14,7 @@ const FAILURE_KEY = "google.ads.googleads.v3.errors.googleadsfailure-bin";
 const REQUEST_ID_KEY = "request-id";
 const RETRY_STATUS_CODES = [grpc.status.INTERNAL, grpc.status.RESOURCE_EXHAUSTED];
 
-type NextCall = (options: grpc.CallOptions) => grpc.InterceptingCall | null;
+type NextCall = (options: grpc.CallOptions) => grpc.InterceptingCall;
 export type InterceptorMethod = (options: grpc.CallOptions, nextCall: NextCall) => any;
 
 export class MetadataInterceptor {

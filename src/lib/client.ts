@@ -1,5 +1,5 @@
 import cosmiconfig from "cosmiconfig";
-import grpc from "grpc";
+import grpc from "@grpc/grpc-js";
 import get from "lodash.get";
 
 import Auth from "./auth";
@@ -175,11 +175,11 @@ export class GoogleAdsClient {
     const interceptors: InterceptorMethod[] = [
       (
         options: grpc.CallOptions,
-        nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall | null
+        nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall
       ) => metadataInterceptor.intercept(options, nextCall),
       (
         options: grpc.CallOptions,
-        nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall | null
+        nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall
       ) => exceptionInterceptor.intercept(options, nextCall),
     ];
 
@@ -187,7 +187,7 @@ export class GoogleAdsClient {
       interceptors.push(
         (
           options: grpc.CallOptions,
-          nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall | null
+          nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall
         ) => responseParsingInterceptor.intercept(options, nextCall)
       );
     }
@@ -196,7 +196,7 @@ export class GoogleAdsClient {
       interceptors.push(
         (
           options: grpc.CallOptions,
-          nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall | null
+          nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall
         ) => preventMutationsInterceptor.intercept(options, nextCall)
       );
     }
@@ -206,7 +206,7 @@ export class GoogleAdsClient {
       interceptors.push(
         (
           options: grpc.CallOptions,
-          nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall | null
+          nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall
         ) => loggingInterceptor.intercept(options, nextCall)
       );
     }
