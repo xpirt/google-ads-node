@@ -1,5 +1,5 @@
 import * as protobufHelpers from "google-protobuf/google/protobuf/field_mask_pb";
-import { Client, CallOptions } from "@grpc/grpc-js";
+import { Client, /*CallOptions*/ } from "@grpc/grpc-js";
 import camelCase from "lodash.camelcase";
 import get from "lodash.get";
 import set from "lodash.set";
@@ -7,7 +7,7 @@ import snakeCase from "lodash.snakecase";
 
 import * as structs from "./struct";
 
-const NON_MUTABLE_METHOD_PREFIXES = ["Get", "List", "Generate", "Search"];
+// const NON_MUTABLE_METHOD_PREFIXES = ["Get", "List", "Generate", "Search"];
 
 // Based on https://github.com/leaves4j/grpc-promisify/blob/master/src/index.js
 export function promisifyServiceClient(client: Client) {
@@ -282,21 +282,21 @@ export function getErrorLocationPath(location: any): string {
   return paths.join(".");
 }
 
-export function isMutationRequest(interceptMessage: CallOptions): boolean {
-  let isMutation = true;
+// export function isMutationRequest(interceptMessage: CallOptions): boolean {
+//   let isMutation = true;
 
-  if (interceptMessage?.method_definition?.path) {
-    const { path } = interceptMessage.method_definition;
-    for (const prefix of NON_MUTABLE_METHOD_PREFIXES) {
-      if (path.includes(prefix)) {
-        isMutation = false;
-        break;
-      }
-    }
-  }
+//   if (interceptMessage?.method_definition?.path) {
+//     const { path } = interceptMessage.method_definition;
+//     for (const prefix of NON_MUTABLE_METHOD_PREFIXES) {
+//       if (path.includes(prefix)) {
+//         isMutation = false;
+//         break;
+//       }
+//     }
+//   }
 
-  return isMutation;
-}
+//   return isMutation;
+// }
 
 export function safeguardMutationProtobufRequest(message: any, next: Function) {
   // Force validation only for requests if the setValidateOnly method exists

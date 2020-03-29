@@ -127,7 +127,7 @@ example();
 | `refresh_token`       | `string`          | ➖       | Same as above. Obtained from [OAuth2 flow](https://developers.google.com/google-ads/api/docs/first-call/refresh-token).                                                                                                                              |
 | `accessTokenGetter()` | `Promise<string>` | ❌       | Function to retrieve access token per request. See [Access Token Getter](https://github.com/Opteo/google-ads-node#3-access-token-getter).                                                                                                            |
 | `parseResults`        | `boolean`         | ❌       | Formats Protobuf responses as objects. See [Results](https://github.com/Opteo/google-ads-node#results).                                                                                                                                              |
-| `preventMutations`    | `boolean`         | ❌       | Safe mode to prevent accidental mutations. See [Safe Mode](https://github.com/Opteo/google-ads-node#safe-mode).                                                                                                                                      |
+<!-- | `preventMutations`    | `boolean`         | ❌       | Safe mode to prevent accidental mutations. See [Safe Mode](https://github.com/Opteo/google-ads-node#safe-mode).                                                                                                                                      | -->
 | `logging`             | `object`          | ❌       | See [Logging](https://github.com/Opteo/google-ads-node#logging).                                                                                                                                                                                     |
 
 ### Authentication
@@ -244,11 +244,11 @@ const pb = client.buildResource("Campaign", campaign);
 console.log(pb.getName()); // "Interplanetary Cruises"
 ```
 
-### Safe Mode
+<!-- ### Safe Mode
 
 To prevent accidental mutations, particularly in the case of working with the library in a development or test environment, we provide a `preventMutations` client option. This essentially intercepts all requests, and sets the `validateOnly` field to `true`. This means **no mutations** will be performed when the request is recieved by the Google Ads API. Any mutation requests will simply return an empty response, but importantly, are still validated by the API, meaning you will still be aware of any errors in the request body.
 
-Any read only API methods, such as get/list/generate, are unaffected. For example, `GoogleAdsService.search` will still function as expected, whilst `GoogleAdsService.mutate` will only validate the request. Mutations will also be prevented for more unusual services, e.g. `MutateJobService` or `RecommendationService`.
+Any read only API methods, such as get/list/generate, are unaffected. For example, `GoogleAdsService.search` will still function as expected, whilst `GoogleAdsService.mutate` will only validate the request. Mutations will also be prevented for more unusual services, e.g. `MutateJobService` or `RecommendationService`. -->
 
 ### Results
 

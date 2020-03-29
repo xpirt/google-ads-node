@@ -1,4 +1,4 @@
-import grpc from "@grpc/grpc-js";
+// import grpc from "@grpc/grpc-js";
 
 import { GoogleAdsClient } from "./client";
 import {
@@ -11,7 +11,7 @@ import {
   formatCallResults,
   getFieldMask,
   getErrorLocationPath,
-  isMutationRequest,
+  // isMutationRequest,
   safeguardMutationProtobufRequest,
 } from "./utils";
 
@@ -454,39 +454,39 @@ test("field location error can be generated from errors list object", () => {
   expect(getErrorLocationPath(undefined)).toEqual("");
 });
 
-test("mutation requests can be detected correctly", () => {
-  const searchRequestCallOptions: grpc.CallOptions = {
-    method_definition: {
-      path: "/google.ads.googleads.v3.services.GoogleAdsService/Search",
-      requestStream: false,
-      responseStream: false,
-      // Not required for test
-      requestSerialize: undefined,
-      responseDeserialize: undefined,
-    },
-  };
+// test("mutation requests can be detected correctly", () => {
+//   const searchRequestCallOptions: grpc.CallOptions = {
+//     method_definition: {
+//       path: "/google.ads.googleads.v3.services.GoogleAdsService/Search",
+//       requestStream: false,
+//       responseStream: false,
+//       // Not required for test
+//       requestSerialize: undefined,
+//       responseDeserialize: undefined,
+//     },
+//   };
 
-  const mutateCampaignBudgetCallOptions: grpc.CallOptions = {
-    method_definition: {
-      path: "/google.ads.googleads.v3.services.CampaignBudgetService/MutateCampaignBudgets",
-      requestStream: false,
-      responseStream: false,
-      // Not required for test
-      requestSerialize: undefined,
-      responseDeserialize: undefined,
-    },
-  };
+//   const mutateCampaignBudgetCallOptions: grpc.CallOptions = {
+//     method_definition: {
+//       path: "/google.ads.googleads.v3.services.CampaignBudgetService/MutateCampaignBudgets",
+//       requestStream: false,
+//       responseStream: false,
+//       // Not required for test
+//       requestSerialize: undefined,
+//       responseDeserialize: undefined,
+//     },
+//   };
 
-  const applyRecommendationRequestCallOptions: grpc.CallOptions = {
-    method_definition: {
-      path: "/google.ads.googleads.v3.services.RecommendationService/ApplyRecommendation",
-    },
-  };
+//   const applyRecommendationRequestCallOptions: grpc.CallOptions = {
+//     method_definition: {
+//       path: "/google.ads.googleads.v3.services.RecommendationService/ApplyRecommendation",
+//     },
+//   };
 
-  expect(isMutationRequest(searchRequestCallOptions)).toEqual(false);
-  expect(isMutationRequest(mutateCampaignBudgetCallOptions)).toEqual(true);
-  expect(isMutationRequest(applyRecommendationRequestCallOptions)).toEqual(true);
-});
+//   expect(isMutationRequest(searchRequestCallOptions)).toEqual(false);
+//   expect(isMutationRequest(mutateCampaignBudgetCallOptions)).toEqual(true);
+//   expect(isMutationRequest(applyRecommendationRequestCallOptions)).toEqual(true);
+// });
 
 test("mutation requests can be safeguarded i.e. set to validate only or operation list cleared", () => {
   const campaignBudgetRequest = buildCampaignBudgetRequest();

@@ -7,7 +7,7 @@ import {
   MetadataInterceptor,
   ExceptionInterceptor,
   ResponseParsingInterceptor,
-  PreventMutationsInterceptor,
+  // PreventMutationsInterceptor,
   InterceptorMethod,
   LoggingInterceptor,
 } from "./interceptor";
@@ -170,7 +170,7 @@ export class GoogleAdsClient {
     );
     const exceptionInterceptor = new ExceptionInterceptor();
     const responseParsingInterceptor = new ResponseParsingInterceptor();
-    const preventMutationsInterceptor = new PreventMutationsInterceptor();
+    // const preventMutationsInterceptor = new PreventMutationsInterceptor();
 
     const interceptors: InterceptorMethod[] = [
       (
@@ -192,14 +192,14 @@ export class GoogleAdsClient {
       );
     }
 
-    if (this.options.preventMutations) {
-      interceptors.push(
-        (
-          options: grpc.CallOptions,
-          nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall
-        ) => preventMutationsInterceptor.intercept(options, nextCall)
-      );
-    }
+    // if (this.options.preventMutations) {
+    //   interceptors.push(
+    //     (
+    //       options: grpc.CallOptions,
+    //       nextCall: (options: grpc.CallOptions) => grpc.InterceptingCall
+    //     ) => preventMutationsInterceptor.intercept(options, nextCall)
+    //   );
+    // }
 
     if (this.options.logging) {
       const loggingInterceptor = new LoggingInterceptor(this.options.logging);

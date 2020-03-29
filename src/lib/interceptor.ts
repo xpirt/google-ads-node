@@ -6,8 +6,8 @@ import { GoogleAdsFailure, GoogleAdsError, ErrorCode } from "./types";
 import {
   formatCallResults,
   getErrorLocationPath,
-  isMutationRequest,
-  safeguardMutationProtobufRequest,
+  // isMutationRequest,
+  // safeguardMutationProtobufRequest,
 } from "./utils";
 
 const FAILURE_KEY = "google.ads.googleads.v3.errors.googleadsfailure-bin";
@@ -247,30 +247,30 @@ export class ResponseParsingInterceptor {
   }
 }
 
-export class PreventMutationsInterceptor {
-  private requestInterceptor: grpc.Requester;
-  private blankInterceptor: grpc.Requester;
+// export class PreventMutationsInterceptor {
+//   private requestInterceptor: grpc.Requester;
+//   private blankInterceptor: grpc.Requester;
 
-  constructor() {
-    this.requestInterceptor = this.buildRequester();
-    this.blankInterceptor = buildBlankInterceptor();
-  }
+//   constructor() {
+//     this.requestInterceptor = this.buildRequester();
+//     this.blankInterceptor = buildBlankInterceptor();
+//   }
 
-  public intercept(options: grpc.CallOptions, nextCall: NextCall): grpc.InterceptingCall {
-    if (isMutationRequest(options)) {
-      return new grpc.InterceptingCall(nextCall(options), this.requestInterceptor);
-    }
-    return new grpc.InterceptingCall(nextCall(options), this.blankInterceptor);
-  }
+//   public intercept(options: grpc.CallOptions, nextCall: NextCall): grpc.InterceptingCall {
+//     if (isMutationRequest(options)) {
+//       return new grpc.InterceptingCall(nextCall(options), this.requestInterceptor);
+//     }
+//     return new grpc.InterceptingCall(nextCall(options), this.blankInterceptor);
+//   }
 
-  private buildRequester(): grpc.Requester {
-    return new grpc.RequesterBuilder()
-      .withSendMessage((message: any, next: Function) => {
-        safeguardMutationProtobufRequest(message, next);
-      })
-      .build();
-  }
-}
+//   private buildRequester(): grpc.Requester {
+//     return new grpc.RequesterBuilder()
+//       .withSendMessage((message: any, next: Function) => {
+//         safeguardMutationProtobufRequest(message, next);
+//       })
+//       .build();
+//   }
+// }
 
 export class LoggingInterceptor {
   private requestInterceptor: grpc.Requester;
@@ -284,11 +284,11 @@ export class LoggingInterceptor {
   }
 
   public intercept(options: grpc.CallOptions, nextCall: NextCall): grpc.InterceptingCall {
-    const method = options.method_definition.path;
-    this.logger.setRequestMethod(method);
-    if (isMutationRequest(options)) {
-      this.logger.setRequestIsMutation();
-    }
+    // const method = options.method_definition.path;
+    // this.logger.setRequestMethod(method);
+    // if (isMutationRequest(options)) {
+    //   this.logger.setRequestIsMutation();
+    // }
     return new grpc.InterceptingCall(nextCall(options), this.requestInterceptor);
   }
 
@@ -367,6 +367,6 @@ class ClientError extends Error {
   }
 }
 
-function buildBlankInterceptor(): grpc.Requester {
-  return new grpc.RequesterBuilder().build();
-}
+// function buildBlankInterceptor(): grpc.Requester {
+//   return new grpc.RequesterBuilder().build();
+// }
